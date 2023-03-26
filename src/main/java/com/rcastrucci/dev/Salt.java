@@ -15,6 +15,9 @@ public class Salt {
     private final String salt;
     private final String spice;
 
+    /**
+     * Constructor
+     */
     public Salt() {
         this.salt = generateSpices().get(0);
         this.spice = generateSpices().get(1);
