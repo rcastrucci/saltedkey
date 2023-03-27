@@ -1,5 +1,7 @@
 # Salted Key
 
+[![Maven Central](https://img.shields.io/maven-central/v/com.rcastrucci.dev/SaltedKey.svg)](https://central.sonatype.com/artifact/com.rcastrucci.dev/SaltedKey/1.0)
+
 A simple repository to create and verify salted keys.
 
 The library has two public methods:
