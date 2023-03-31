@@ -7,7 +7,13 @@ import java.util.Arrays;
 import java.util.Date;
 
 /**
- * Simple repository to create and verify salted keys.
+ * A simple repository to salt a secret key and verify it's authenticity.
+ * Developed to be used in mobile applications while comunicating with a server side using an Api.
+ * Instead of sending your apikey straight on the request, SaltedKey can generate a temporary public key,
+ * valid for one minute. This public key can be sent on request and on server side SaltedKey can verify
+ * it's authenticity and match with the apikey. The Salt is based on timemillis and uses the algorithm
+ * SHA-256 to create the public key. The public key will change every minute. This library can increase
+ * your API security leaving no room to leak your api secret key.
  * @author dev.rcastrucci
  */
 public class Salt {
@@ -25,7 +31,7 @@ public class Salt {
 
     /**
      * Generate a public key out of your private key this public key will be valid for about 1.5 minutes
-     * @param privateKey your personal private key
+     * @param privateKey your secret private key
      * @return a string format with a public key
      */
     public String createSaltedKey(String privateKey) {
@@ -34,8 +40,8 @@ public class Salt {
 
     /**
      * Verify if the public key match with a private key
-     * @param publicKey a public key
-     * @param privateKey a private key
+     * @param publicKey is the key to be verified and check if match with your private key
+     * @param privateKey is your secret private key
      * @return boolean true if they match otherwise false
      */
     public boolean verifySaltedKey(String publicKey, String privateKey) {
