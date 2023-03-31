@@ -2,7 +2,7 @@
 
 [![Maven Central](https://img.shields.io/maven-central/v/com.rcastrucci.dev/SaltedKey.svg)](https://central.sonatype.com/artifact/com.rcastrucci.dev/SaltedKey/1.0)
 
-A simple repository to create and verify salted keys. Client and server should have access to the private key or secret key, just so the library can generate a public key and on server side verify it's authenticity.
+A simple repository to salt a secret key and verify it's authenticity. Developed to be used in mobile applications while comunicating with a server side using an Api. Instead of sending your apikey straight on the request, SaltedKey can generate a temporary public key, valid for one minute. This public key can be sent on request and on server side SaltedKey can verify it's authenticity and match with the apikey. The Salt is based on timemillis and uses the algorithm SHA-256 to create the public key. The public key will change every minute. This library can increase your API security leaving no room to leak your api secret key.
 
 ## Import on Maven projects
     <dependency>
@@ -11,10 +11,20 @@ A simple repository to create and verify salted keys. Client and server should h
         <version>1.0</version>
     </dependency>
 
-The library has two public methods:
+## To Use
+    // secret key
+    String privateKey = "your_api_key";
+    
+    // client side
+    String publicKey = new Salt().createSaltedKey(privateKey);
+    
+    // server side
+    Boolean isValid = new Salt().verifySaltedKey(publicKey, privateKey);
+    
+
 
 ### Create public key
-###### This method will generate a publicKey valid for 1 minute. This key can be verified by the other method called verifySaltedKey.
+###### This method will generate a publicKey valid for 1 minute.
     public createSaltedKey String (String privateKey)
 
 ### Verify public key
