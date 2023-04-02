@@ -4,7 +4,7 @@
 
     <groupId>com.rcastrucci.dev</groupId>
     <artifactId>SaltedKey</artifactId>
-    <version>1.0.1</version>
+    <version>1.2.0</version>
 
     <build>
         <plugins>
